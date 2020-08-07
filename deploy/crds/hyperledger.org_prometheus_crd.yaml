@@ -1,0 +1,103 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: prometheus.hyperledger.org
+spec:
+  group: hyperledger.org
+  names:
+    kind: Prometheus
+    listKind: PrometheusList
+    plural: prometheus
+    singular: prometheus
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Prometheus is the Schema for the prometheus API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            default:
+              image:
+                pullPolicy: IfNotPresent
+                repository: prom/prometheus
+                tag: v2.11.1
+              nodeport: 30090
+              replicas: 1
+              resources:
+                cpuLimit: 500m
+                cpuRequest: 100m
+                memLimit: 512Mi
+                memRequest: 256Mi
+            description: PrometheusSpec defines the desired state of Prometheus
+            properties:
+              image:
+                default:
+                  pullPolicy: IfNotPresent
+                  repository: prom/prometheus
+                  tag: v2.11.1
+                description: Prometheus Image Configuration
+                properties:
+                  pullPolicy:
+                    default: IfNotPresent
+                    description: Image pull policy
+                    type: string
+                  repository:
+                    description: Image repository
+                    type: string
+                  tag:
+                    description: Image tag
+                    type: string
+                type: object
+              nodeport:
+                default: 30090
+                description: NodePort
+                format: int32
+                type: integer
+              replicas:
+                default: 1
+                description: Number of replica pods corresponding to prometheus node
+                format: int32
+                type: integer
+              resources:
+                default:
+                  cpuLimit: 500m
+                  cpuRequest: 100m
+                  memLimit: 512Mi
+                  memRequest: 256Mi
+                description: Requests and limits
+                properties:
+                  cpuLimit:
+                    description: CPU Limit
+                    type: string
+                  cpuRequest:
+                    description: CPU Request
+                    type: string
+                  memLimit:
+                    description: Memory Limit
+                    type: string
+                  memRequest:
+                    description: Memory Request
+                    type: string
+                type: object
+            type: object
+          status:
+            description: PrometheusStatus defines the observed state of Prometheus
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

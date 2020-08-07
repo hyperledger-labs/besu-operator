@@ -23,6 +23,8 @@ This lab directly affects the Hyperledger Besu Project. The basic operator struc
 
 Details : [Lab Google Doc](https://docs.google.com/document/d/1GdBv62g8dsASe4QSESar5JZNzMq2gq5L5onEqJa2HFg/edit?usp=sharing)
 
+Usage Guide : [Instructions](./guide.md)
+
 # Initial Committers
 - https://github.com/Sumaid
 

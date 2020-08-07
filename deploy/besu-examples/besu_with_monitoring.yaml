@@ -1,0 +1,33 @@
+apiVersion: hyperledger.org/v1alpha1
+kind: Besu
+metadata:
+  name: besu
+spec:
+  bootnodescount: 2
+  validatorscount: 2
+  members: 1
+  monitoring: true
+  prometheusspec:
+    image:
+      pullPolicy: IfNotPresent
+      repository: prom/prometheus
+      tag: v2.11.1
+    nodeport: 30090
+    replicas: 1
+    resources:
+      cpuLimit: 500m
+      cpuRequest: 100m
+      memLimit: 512Mi
+      memRequest: 256Mi
+  grafanaspec:
+    image:
+      pullPolicy: IfNotPresent
+      repository: grafana/grafana
+      tag: 6.2.5
+    nodeport: 30030
+    replicas: 1
+    resources:
+      cpuLimit: 500m
+      cpuRequest: 100m
+      memLimit: 512Mi
+      memRequest: 256Mi
