@@ -1,0 +1,8 @@
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+repository:
+  name: besu-operator
+  description: Kubernetes operator to provide an easier way of packaging, deploying, and managing Hyperledger Besu network.
+  archived: true
+  private: false
